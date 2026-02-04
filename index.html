@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forever and a Day ❤️ | For Christabel</title>
+    <style>
+        /* (your original CSS unchanged) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+            color: white;
+            text-align: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .page {
+            display: none;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 1s ease;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px 30px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            margin-bottom: 25px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.95);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .typed-text {
+            min-height: 200px;
+            white-space: pre-line;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            transition: all 0.8s ease;
+        }
+
+        .button-group.hiding {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+
+        .button-group.hidden {
+            display: none;
+        }
+
+        .btn {
+            padding: 16px 35px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            min-width: 180px;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: white;
+            color: #ff4f7a;
+        }
+
+        .btn-secondary {
+            background: #ff4f7a;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #ff3366;
+            color: white;
+        }
+
+        .btn-hide {
+            animation: hideButton 1s ease forwards;
+        }
+
+        @keyframes hideButton {
+            0% { opacity: 1; transform: scale(1); }
+            70% { opacity: 0.3; transform: scale(0.95); }
+            100% { opacity: 0; transform: scale(0.9); display: none !important; }
+        }
+
+        .photo-container {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            margin: 30px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        #slideshow {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.8s ease;
+        }
+
+        .photo-counter {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .countdown-display {
+            font-size: 4.5rem;
+            font-weight: bold;
+            margin: 30px 0;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            color: #fff;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        textarea {
+            width: 100%;
+            max-width: 600px;
+            height: 150px;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            font-family: inherit;
+            margin: 20px 0;
+            resize: none;
+            color: #333;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #ff4f7a;
+            box-shadow: 0 0 0 3px rgba(255, 79, 122, 0.2);
+        }
+
+        .heart {
+            position: fixed;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 24px;
+            z-index: -1;
+            pointer-events: none;
+            animation: float 6s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .confetti-heart {
+            position: fixed;
+            font-size: 28px;
+            z-index: 1000;
+            pointer-events: none;
+            animation: explode 5s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(0) translateY(0) rotate(0deg); opacity: 1; }
+            20% { transform: scale(1.5) translateY(-100px) rotate(180deg); opacity: 0.9; }
+            40% { transform: scale(1.2) translateY(-200px) rotate(360deg); opacity: 0.8; }
+            60% { transform: scale(0.8) translateY(-300px) rotate(540deg); opacity: 0.6; }
+            80% { transform: scale(0.5) translateY(-400px) rotate(720deg); opacity: 0.4; }
+            100% { transform: scale(0.2) translateY(-500px) rotate(900deg); opacity: 0; }
+        }
+
+        .celebration-confetti {
+            position: fixed;
+            font-size: 24px;
+            z-index: 999;
+            pointer-events: none;
+            animation: celebrate 5s ease-out forwards;
+        }
+
+        @keyframes celebrate {
+            0% { transform: translateY(100vh) rotate(0deg) scale(0); opacity: 1; }
+            20% { transform: translateY(70vh) rotate(180deg) scale(1); opacity: 1; }
+            50% { transform: translateY(40vh) rotate(360deg) scale(1.2); opacity: 0.9; }
+            80% { transform: translateY(10vh) rotate(540deg) scale(0.8); opacity: 0.6; }
+            100% { transform: translateY(-100px) rotate(720deg) scale(0); opacity: 0; }
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal h3 {
+            color: #ff4f7a;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .modal input:focus {
+            outline: none;
+            border-color: #ff4f7a;
+        }
+
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .music-control:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .music-icon {
+            font-size: 24px;
+            color: white;
+        }
+
+        .music-control.muted .music-icon::after {
+            content: "❌";
+            position: absolute;
+            font-size: 12px;
+            top: 0;
+            right: 0;
+            background: rgba(255, 0, 0, 0.7);
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            line-height: 18px;
+        }
+
+        .song-title {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            backdrop-filter: blur(5px);
+            display: none;
+        }
+
+        .music-control:hover + .song-title {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .countdown-display { font-size: 3.5rem; }
+            .card { padding: 30px 20px; }
+            .btn { padding: 14px 25px; min-width: 160px; }
+            .photo-container { height: 300px; }
+            .typed-text { min-height: 150px; font-size: 1.1rem; }
+            .music-control { top: 10px; right: 10px; width: 45px; height: 45px; }
+            .song-title { top: 65px; right: 10px; font-size: 0.7rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.7rem; }
+            p { font-size: 1.1rem; }
+            .countdown-display { font-size: 2.8rem; }
+            .button-group { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 280px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- YouTube Music Player -->
+    <iframe id="youtube-player" width="0" height="0" src="https://www.youtube.com/embed/WvV5TbJc9tQ?enablejsapi=1&controls=0&showinfo=0&rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    <!-- Music Control -->
+    <div class="music-control" id="musicControl" onclick="toggleMusic()">
+        <div class="music-icon" id="musicIcon">🎵</div>
+    </div>
+    <div class="song-title">"Thinking Out Loud" - Ed Sheeran</div>
+
+    <!-- Page 1: Introduction -->
+    <div class="page active" id="page1">
+        <div class="card">
+            <h1>My Love ❤️</h1>
+            <p>I created this just for you... because every moment with you is special 😌</p>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="startExperience()">Begin Our Journey 💕</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 2: Love Letter -->
+    <div class="page" id="page2">
+        <div class="card">
+            <h2>To My Everything 💌</h2>
+            <div id="typedText" class="typed-text"></div>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="goToPage('page3')">Continue →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 3: Countdown -->
+    <div class="page" id="page3">
+        <div class="card">
+            <h2>Counting Every Moment ⏳</h2>
+            <div id="countdown" class="countdown-display">Loading...</div>
+            <p>Until our next Valentine's Day together</p>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="goToPage('page4')">Our Memories 📸</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 4: Photos -->
+    <div class="page" id="page4">
+        <div class="card">
+            <h2>Our Beautiful Journey ❤️</h2>
+            <div class="photo-container">
+                <img id="slideshow" src="" alt="Our special memories">
+                <div class="photo-counter" id="photoCounter">1 / 5</div>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="goToPage('page5')">Next Question 💘</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 5: Valentine Question -->
+    <div class="page" id="page5">
+        <div class="card">
+            <h2>The Most Important Question 💘</h2>
+            <p>Will you be my Valentine, my love?</p>
+            <div class="button-group" id="valentineButtons">
+                <button id="yesBtn" class="btn btn-primary" onclick="acceptValentine()">YES! 💕 Forever</button>
+                <button id="noBtn" class="btn btn-danger" onmouseover="dodgeButton()" ontouchstart="dodgeButton()">Maybe Later 😅</button>
+            </div>
+            <div id="responseMessage" style="margin-top: 25px; font-size: 1.4rem; min-height: 60px;"></div>
+            <div class="button-group" id="nextButtons" style="display: none;">
+                <button class="btn btn-secondary" onclick="goToPage('page6')">Leave Me a Message 💬</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 6: Message -->
+    <div class="page" id="page6">
+        <div class="card">
+            <h2>Write to My Heart 💬</h2>
+            <textarea id="messageBox" placeholder="Type your sweet message here, my love..."></textarea>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="saveMessage()">Save in My Heart 💌</button>
+            </div>
+            <div id="savedMessage" style="margin-top: 20px; font-size: 1.2rem; min-height: 40px;"></div>
+            <div class="button-group">
+                <button class="btn btn-secondary" onclick="goToPage('page7')">Final Surprise 🎁</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page 7: Final -->
+    <div class="page" id="page7">
+        <div class="card">
+            <h2>You're My Forever ❤️</h2>
+            <p>You're not just my Valentine for today. You're my forever.</p>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="openSecretModal()">Open Secret Page 🔒</button>
+            </div>
+
+            <!-- NEW: Share secret link button (copies URL with #proposal) -->
+            <div class="button-group" style="margin-top: 12px;">
+                <button class="btn btn-secondary" onclick="copySecretLink()">Share Secret Link 🔗</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Proposal Page -->
+    <div class="page" id="proposalPage">
+        <div class="card">
+            <h2>My Dearest Christabel 💍</h2>
+            <p style="font-size: 1.4rem; line-height: 1.9;">
+                This isn't just a website...<br><br>
+                It's a promise from my heart to yours.<br><br>
+                One day, when the time is right,<br>
+                I want to ask you to be my wife.<br><br>
+                You're my today, my tomorrow,<br>
+                and all my forever.<br><br>
+                — With all my love,<br>
+                <strong style="color: #ff4f7a; font-size: 1.5rem;">Zunda May-son Chilundika</strong> ❤️
+            </p>
+            <div class="button-group">
+                <button class="btn btn-secondary" onclick="goToPage('page1')">Start Over 🔄</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Modal -->
+    <div class="modal-overlay" id="passwordModal">
+        <div class="modal">
+            <h3>Our Secret 💍</h3>
+            <p>Enter the date that started it all ❤️</p>
+            <input type="password" id="passwordInput" placeholder="DD/MM/YYYY" maxlength="10">
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="checkPassword()">Unlock Our Future 💖</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ================= CONFIGURATION =================
+        const photoUrls = [
+            'https://www.dropbox.com/scl/fi/afd5qwdkal1by1teak3rm/IMG_9956.jpeg?rlkey=yynhyvyvihgve2r5pntgfzfml&st=xa4eb0tr&raw=1',
+            'https://www.dropbox.com/scl/fi/kyxhq5bg8d44595a7dy4j/03577947-84a8-46c3-9875-0e4945addc26.jpeg?rlkey=sgzjwhbmzow7mmq1v2p8ctmzk&st=6i0nfhf7&raw=1',
+            'https://www.dropbox.com/scl/fi/w3j9dz5tgq53buz2vu50y/bc515b61-8cc4-47d3-86f3-e3d347084483.jpeg?rlkey=nzmmcxwe346trf3ziyb6ribxq&st=wvret2y0&raw=1',
+            'https://www.dropbox.com/scl/fi/um2q3lc9nsuo9v4pgmpmu/f603936d-b09c-4e6a-99e4-fd9690aca496.jpeg?rlkey=m3zra9pyuracm996dswjrjbn7&st=vuzp155i&raw=1',
+            'https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+        ];
+
+        const specialDate = '20/09/2021';
+
+        const loveMessage = `My dearest Christabel,
+
+As Ed Sheeran sings in "Thinking Out Loud" - I'm thinking about all the ways 
+I want to love you for the rest of my life. ❤️
+
+When your legs don't work like they used to before,
+And I can't sweep you off of your feet...
+I want to be that person who's still by your side,
+Loving you completely, making you feel complete.
+
+You have this incredible way of turning ordinary days 
+into extraordinary memories. When I'm with you, 
+everything feels right in the world.
+
+You're not just my girlfriend - you're my best friend, 
+my confidante, my peace in the chaos, and my joy 
+in the quiet moments.
+
+With you, I've learned what true love really means. 
+It's in the way you smile, the way you care, 
+and the way you make me want to be a better man 
+every single day.
+
+No matter what life brings us, I want to face it all 
+with you by my side. Through the sunshine and the storms, 
+the laughter and the tears.
+
+I choose you. Today, tomorrow, and for all the days after that. ❤️
+
+Just like the song says...
+"Darling, I will be loving you 'til we're 70"
+
+Forever yours,
+Zunda`;
+
+        // ================= VARIABLES =================
+        let currentPage = 'page1';
+        let typingIndex = 0;
+        let photoIndex = 0;
+        let youtubePlayer = null;
+        let isMusicPlaying = false;
+        let isMusicMuted = false;
+        let valentineAccepted = false;
+
+        // ================= YOUTUBE PLAYER =================
+        function onYouTubeIframeAPIReady() {
+            youtubePlayer = new YT.Player('youtube-player', {
+                height: '0',
+                width: '0',
+                videoId: 'WvV5TbJc9tQ',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'disablekb': 1,
+                    'fs': 0,
+                    'loop': 1,
+                    'playlist': 'WvV5TbJc9tQ',
+                    'iv_load_policy': 3,
+                    'modestbranding': 1,
+                    'rel': 0
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.setVolume(50);
+            updateMusicIcon();
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                isMusicPlaying = true;
+                updateMusicIcon();
+            } else if (event.data === YT.PlayerState.PAUSED) {
+                isMusicPlaying = false;
+                updateMusicIcon();
+            } else if (event.data === YT.PlayerState.ENDED) {
+                youtubePlayer.playVideo();
+            }
+        }
+
+        // ================= MUSIC CONTROLS =================
+        function toggleMusic() {
+            if (!youtubePlayer) return;
+            
+            if (isMusicPlaying) {
+                youtubePlayer.pauseVideo();
+            } else {
+                youtubePlayer.playVideo();
+            }
+        }
+
+        function updateMusicIcon() {
+            const musicIcon = document.getElementById('musicIcon');
+            const musicControl = document.getElementById('musicControl');
+            
+            if (!youtubePlayer) {
+                musicIcon.textContent = '❌';
+                musicControl.classList.add('muted');
+                return;
+            }
+            
+            if (!isMusicPlaying) {
+                musicIcon.textContent = '▶️';
+                musicControl.classList.remove('muted');
+            } else if (isMusicMuted) {
+                musicIcon.textContent = '🔇';
+                musicControl.classList.add('muted');
+            } else {
+                musicIcon.textContent = '🎵';
+                musicControl.classList.remove('muted');
+            }
+        }
+
+        // ================= VALENTINE ACCEPTANCE =================
+        function acceptValentine() {
+            if (valentineAccepted) return;
+            valentineAccepted = true;
+            
+            const responseElement = document.getElementById('responseMessage');
+            responseElement.innerHTML = `
+                <span style="color: #ffeb3b; font-size: 1.6rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">
+                    YAYYYY! 😍💕<br>
+                    "And darling I will be loving you 'til we're 70"<br>
+                    You've made me the happiest man alive! 🎉
+                </span>
+            `;
+            
+            startExtendedConfetti();
+            
+            setTimeout(() => {
+                hideValentineButtons();
+            }, 1000);
+            
+            setTimeout(() => {
+                document.getElementById('nextButtons').style.display = 'flex';
+            }, 2000);
+            
+            if (youtubePlayer) {
+                const currentVolume = youtubePlayer.getVolume();
+                youtubePlayer.setVolume(Math.min(80, currentVolume + 20));
+                
+                setTimeout(() => {
+                    youtubePlayer.setVolume(currentVolume);
+                }, 5000);
+            }
+            
+            document.querySelector('.song-title').textContent = "She Said YES! 🎉";
+            setTimeout(() => {
+                document.querySelector('.song-title').textContent = '"Thinking Out Loud" - Ed Sheeran';
+            }, 3000);
+        }
+
+        function hideValentineButtons() {
+            const buttonGroup = document.getElementById('valentineButtons');
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+            
+            buttonGroup.classList.add('hiding');
+            yesBtn.classList.add('btn-hide');
+            noBtn.classList.add('btn-hide');
+            yesBtn.disabled = true;
+            noBtn.disabled = true;
+            
+            setTimeout(() => {
+                buttonGroup.classList.add('hidden');
+                buttonGroup.classList.remove('hiding');
+            }, 1000);
+        }
+
+        function startExtendedConfetti() {
+            const heartEmojis = ['❤️', '💕', '💖', '💗', '💘', '💙', '💚', '💛', '💜', '🎉', '✨', '🌟'];
+            const confettiColors = [
+                '#ff4f7a', '#ff6b9d', '#ff87b3', '#ffa3c7', 
+                '#ff3366', '#ff6699', '#ff99bb', '#ffccdd',
+                '#ffeb3b', '#4caf50', '#2196f3', '#9c27b0'
+            ];
+            
+            let confettiCount = 0;
+            const confettiInterval = setInterval(() => {
+                if (confettiCount >= 50) {
+                    clearInterval(confettiInterval);
+                    return;
+                }
+                
+                for (let i = 0; i < 8; i++) {
+                    setTimeout(() => {
+                        const heart = document.createElement('div');
+                        heart.className = 'celebration-confetti';
+                        heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                        heart.style.left = `${Math.random() * 100}vw`;
+                        heart.style.top = `${Math.random() * 20 + 80}vh`;
+                        heart.style.fontSize = `${Math.random() * 25 + 20}px`;
+                        heart.style.color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                        heart.style.zIndex = '999';
+                        document.body.appendChild(heart);
+                        
+                        setTimeout(() => {
+                            if (heart.parentNode) heart.remove();
+                        }, 5000);
+                    }, i * 50);
+                }
+                
+                confettiCount++;
+            }, 100);
+        }
+
+        // ================= CORE FUNCTIONS =================
+        function startExperience() {
+            if (youtubePlayer && !isMusicPlaying) {
+                youtubePlayer.playVideo();
+            }
+            goToPage('page2');
+        }
+
+        function goToPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            document.getElementById(pageId).classList.add('active');
+            currentPage = pageId;
+            window.scrollTo(0, 0);
+            
+            if (pageId === 'page2') {
+                startTypingEffect();
+            } else if (pageId === 'page4') {
+                startSlideshow();
+            } else if (pageId === 'page5') {
+                resetButtonPositions();
+            }
+        }
+
+        function startTypingEffect() {
+            const typedTextElement = document.getElementById('typedText');
+            typedTextElement.innerHTML = '';
+            typingIndex = 0;
+            
+            function typeCharacter() {
+                if (typingIndex < loveMessage.length) {
+                    const char = loveMessage.charAt(typingIndex);
+                    typedTextElement.innerHTML += char;
+                    typingIndex++;
+                    const speed = char === '\n' ? 100 : (Math.random() * 20 + 30);
+                    setTimeout(typeCharacter, speed);
+                }
+            }
+            
+            typeCharacter();
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            let valentinesDay = new Date(currentYear, 1, 14);
+            
+            if (now > valentinesDay) {
+                valentinesDay = new Date(currentYear + 1, 1, 14);
+            }
+            
+            const timeDiff = valentinesDay - now;
+            const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            document.getElementById('countdown').textContent = `${daysLeft} Days`;
+            setTimeout(updateCountdown, 60000);
+        }
+
+        function startSlideshow() {
+            const slideshowElement = document.getElementById('slideshow');
+            const counterElement = document.getElementById('photoCounter');
+            
+            if (photoUrls.length > 0) {
+                slideshowElement.onerror = function() {
+                    photoIndex = (photoIndex + 1) % photoUrls.length;
+                    slideshowElement.src = photoUrls[photoIndex];
+                    counterElement.textContent = `${photoIndex + 1} / ${photoUrls.length}`;
+                };
+                
+                slideshowElement.src = photoUrls[0];
+                counterElement.textContent = `1 / ${photoUrls.length}`;
+                photoIndex = 0;
+            }
+            
+            const slideshowInterval = setInterval(() => {
+                if (currentPage !== 'page4') {
+                    clearInterval(slideshowInterval);
+                    return;
+                }
+                
+                photoIndex = (photoIndex + 1) % photoUrls.length;
+                slideshowElement.style.opacity = 0;
+                
+                setTimeout(() => {
+                    slideshowElement.src = photoUrls[photoIndex];
+                    slideshowElement.style.opacity = 1;
+                    counterElement.textContent = `${photoIndex + 1} / ${photoUrls.length}`;
+                }, 500);
+            }, 5000);
+        }
+
+        function dodgeButton() {
+            if (valentineAccepted) return;
+            
+            const button = document.getElementById('noBtn');
+            const maxX = window.innerWidth - button.offsetWidth - 20;
+            const maxY = window.innerHeight - button.offsetHeight - 20;
+            
+            const randomX = Math.max(20, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(20, Math.floor(Math.random() * maxY));
+            
+            button.style.position = 'fixed';
+            button.style.left = `${randomX}px`;
+            button.style.top = `${randomY}px`;
+            button.style.transition = 'all 0.4s ease';
+            button.style.zIndex = '100';
+            
+            button.textContent = ['No 😅', 'Try Again 😜', 'Not Today 😏', 'Catch Me! 🏃‍♂️'][Math.floor(Math.random() * 4)];
+        }
+
+        function resetButtonPositions() {
+            const noBtn = document.getElementById('noBtn');
+            noBtn.style.position = '';
+            noBtn.style.left = '';
+            noBtn.style.top = '';
+            noBtn.textContent = 'Maybe Later 😅';
+        }
+
+        function saveMessage() {
+            const message = document.getElementById('messageBox').value.trim();
+            const savedElement = document.getElementById('savedMessage');
+            
+            if (message) {
+                localStorage.setItem('valentineMessage', message);
+                localStorage.setItem('valentineMessageTime', new Date().toLocaleString());
+                savedElement.innerHTML = `💌 Message saved forever in my heart!<br><small>I'll cherish this always</small>`;
+                savedElement.style.color = "#4caf50";
+                
+                if (youtubePlayer) {
+                    const currentVolume = youtubePlayer.getVolume();
+                    youtubePlayer.setVolume(Math.min(70, currentVolume + 10));
+                    setTimeout(() => youtubePlayer.setVolume(currentVolume), 1000);
+                }
+            } else {
+                savedElement.innerHTML = `Please write something sweet first 😊<br><small>I'd love to hear from you</small>`;
+                savedElement.style.color = "#ff6b6b";
+            }
+        }
+
+        function openSecretModal() {
+            document.getElementById('passwordModal').style.display = 'flex';
+            document.getElementById('passwordInput').focus();
+        }
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            
+            if (input === specialDate) {
+                document.getElementById('passwordModal').style.display = 'none';
+                document.getElementById('passwordInput').value = '';
+                goToPage('proposalPage');
+                setTimeout(startExtendedConfetti, 500);
+            } else {
+                alert("Almost there, my love! 😌❤️ Try again. Hint: DD/MM/YYYY");
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
+        }
+
+        function createFloatingHearts() {
+            setInterval(() => {
+                if (document.hidden) return;
+                
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.fontSize = `${Math.random() * 20 + 14}px`;
+                heart.style.animationDuration = `${Math.random() * 6 + 6}s`;
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 12000);
+            }, 800);
+        }
+
+        // ================= NEW: Deep-link & share link support =================
+        // If the page is visited with #proposal, automatically open the password modal.
+        function handleDeepLink() {
+            try {
+                const hash = window.location.hash;
+                if (!hash) return;
+                if (hash === '#proposal') {
+                    // If user wants to deep-link to the secret, open the password modal
+                    openSecretModal();
+                } else if (hash === '#proposal-open') {
+                    // Optional: developer/testing convenience (DO NOT use for real secret)
+                    // goToPage('proposalPage'); // uncomment if you want hash to open directly
+                }
+            } catch (e) {
+                console.warn('Deep link handler error', e);
+            }
+        }
+
+        // Copies a shareable URL containing #proposal to clipboard
+        function copySecretLink() {
+            const url = window.location.origin + window.location.pathname + '#proposal';
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('Secret link copied to clipboard:\n' + url);
+                }, (err) => {
+                    // fallback
+                    prompt('Copy this secret link:', url);
+                });
+            } else {
+                // fallback for older browsers
+                prompt('Copy this secret link:', url);
+            }
+        }
+
+        // Init: run countdown, floating hearts, deep-link handler, etc.
+        window.addEventListener('load', () => {
+            updateCountdown();
+            createFloatingHearts();
+            handleDeepLink();
+        });
+
+        // React to hash changes so link works after navigation
+        window.addEventListener('hashchange', handleDeepLink);
+
+        // (Optionally) Load YouTube IFrame API after load so onYouTubeIframeAPIReady can be called:
+        (function loadYouTubeAPI(){
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        })();
+    </script>
+</body>
+</html>
